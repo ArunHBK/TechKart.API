@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using TechKartApplication.Models;
 
 namespace com.TechKart.UserApi.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Cart
     {
         [Key]

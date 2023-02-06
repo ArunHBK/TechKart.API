@@ -53,15 +53,15 @@ namespace com.TechKart.UserApi.UnitTests.RepositoryTests
             {
                 new UserDetail()
                 {
-                   UserId = 1,FirstName="Vaish", LastName="Tammy", Age=30,Gender="Female", Username ="VaishTammy",ContactNumber=789700986,Address="Avadi"
+                   Id = 1,FirstName="Vaish", LastName="Tammy", Age=30,Gender="Female", Username ="VaishTammy",ContactNumber=789700986,Address="Avadi"
                 },
                 new UserDetail()
                 {
-                   UserId = 2,FirstName="Arun", LastName="HBK", Age=24,Gender="Male", Username ="ArunHBK",ContactNumber=4974943749,Address="Manali"
+                   Id = 2,FirstName="Arun", LastName="HBK", Age=24,Gender="Male", Username ="ArunHBK",ContactNumber=4974943749,Address="Manali"
                 },
                 new UserDetail()
                 {
-                   UserId = 3,FirstName="Jayarath", LastName="Celine", Age=24,Gender="Male", Username ="JayarathCeline",ContactNumber=996786974,Address="Siruseri"
+                   Id = 3,FirstName="Jayarath", LastName="Celine", Age=24,Gender="Male", Username ="JayarathCeline",ContactNumber=996786974,Address="Siruseri"
                 },
             };
             context.UserDetails.AddRange(userDetails);
@@ -69,15 +69,15 @@ namespace com.TechKart.UserApi.UnitTests.RepositoryTests
             {
                 new LoginDetail()
                 {
-                    Id = 1, Username ="VaishTammy", Password="12345", Role="User"
+                    LoginId = 1, Username ="VaishTammy", Password="12345", Role="User"
                 },
                 new LoginDetail()
                 {
-                   Id = 2, Username ="ArunHBK", Password ="12345", Role="User"
+                   LoginId = 2, Username ="ArunHBK", Password ="12345", Role="User"
                 },
                 new LoginDetail()
                 {
-                   Id = 3, Username ="JayarathCeline", Password ="12345", Role="User"
+                   LoginId = 3, Username ="JayarathCeline", Password ="12345", Role="User"
                 },
             };
             context.LoginDetails.AddRange(loginDetails);
@@ -96,6 +96,16 @@ namespace com.TechKart.UserApi.UnitTests.RepositoryTests
         }
         [Test]
         public async Task UserLogin_IncorrectCredential_test()
+        {
+            Mock<IConfiguration> configuration = new Mock<IConfiguration>();
+            configuration.Setup(c => c.GetSection("Jwt:Key").Value).Returns("TechKartApplicationSecurityCode");
+            UserRepo userRepo = new UserRepo(context, configuration.Object);
+            ResponseObject result = await userRepo.Login(new LoginDto { Username="Thanya", Password="12345" });
+
+            Assert.IsFalse(result.Status);
+        }
+        [Test]
+        public async Task UserLogin_WithException_test()
         {
             Mock<IConfiguration> configuration = new Mock<IConfiguration>();
             configuration.Setup(c => c.GetSection("Jwt:Key").Value).Returns("TechKartApplicationSecurityCode");

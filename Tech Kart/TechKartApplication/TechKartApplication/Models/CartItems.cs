@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using TechKartApplication.Models;
 
 namespace com.TechKart.UserApi.Models
 {
+    [ExcludeFromCodeCoverage]
     public class CartItems
     {
         [Key]

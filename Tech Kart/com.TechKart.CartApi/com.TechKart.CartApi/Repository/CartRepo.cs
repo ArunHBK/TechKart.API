@@ -23,7 +23,7 @@ namespace com.TechKart.CartApi.Repository
         {
             try
             {
-                int LoginId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.FindFirstValue("Id")); ;
+                int LoginId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.FindFirstValue("Id"));
                 var cart = await _context.Carts.Where(m => m.LoginId == LoginId)
                     .Include(c =>c.cartItems)
                     .FirstOrDefaultAsync();

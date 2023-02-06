@@ -63,7 +63,7 @@ namespace com.TechKart.ProductApi.Controllers
         [HttpDelete]
         [Route("DeleteProduct")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ResponseObject>> UserDelete(int Id)
+        public async Task<ActionResult<ResponseObject>> DeleteProduct(int Id)
         {
             ResponseObject result = await _productRepo.ProductDelete(Id);
             return StatusCode(result.StatusCode, result);
